@@ -350,11 +350,11 @@ if "istoric_web" not in st.session_state:
 # ═══════════════════════════════════════════════════════════
 # SIDEBAR
 # ═══════════════════════════════════════════════════════════
-if "GEMINI_API_KEY" in st.secrets:
+# Cheia API e stocată exclusiv în Streamlit Secrets — invizibilă utilizatorilor
+try:
     user_api_key = st.secrets["GEMINI_API_KEY"]
-else:
-    st.sidebar.header("🔑 API Key")
-    user_api_key = st.sidebar.text_input("Cheie API Gemini:", type="password", value="")
+except Exception:
+    user_api_key = None
 
 st.sidebar.markdown("""
 ---
@@ -719,7 +719,8 @@ else:
 # ═══════════════════════════════════════════════════════════
 if msg_continut:
     if not user_api_key:
-        st.error("⚠️ Adaugă cheia API Gemini în sidebar pentru a rula analiza.")
+        st.error("⚠️ Aplicația nu este configurată corect. Contactați administratorul.")
+        st.stop()
     else:
         try:
             client = genai.Client(api_key=user_api_key)
