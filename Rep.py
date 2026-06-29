@@ -679,8 +679,19 @@ if "URL" in metoda_analiza:
                         f"Titlu: {titlu_articol}\n"
                         f"Conținut extras: {text_articol}"
                     )
-                except Exception as e:
-                    st.error(f"⚠️ {str(e)}")
+                except Exception:
+                    # Fallback: trimitem URL-ul direct către Gemini fără extracție locală
+                    st.info("ℹ️ Site-ul blochează extracția directă — analizăm sursa prin AI.")
+                    titlu_articol = rezultat_url
+                    msg_continut = (
+                        f"Data curentă reală: {data_azi}.\n"
+                        f"Nu am putut extrage conținutul HTML al acestui URL deoarece site-ul blochează scraperele sau folosește JavaScript dinamic.\n"
+                        f"URL de analizat: {rezultat_url}\n"
+                        f"Analizează acest URL pe baza cunoștințelor tale despre sursa respectivă, "
+                        f"reputația domeniului, pattern-urile editoriale cunoscute și orice informație relevantă "
+                        f"despre această publicație. Menționează explicit în sumar că analiza s-a bazat pe "
+                        f"reputația sursei, nu pe textul articolului."
+                    )
 
 # ═══════════════════════════════════════════════════════════
 # MOD IMAGINE
