@@ -337,7 +337,7 @@ st.markdown("""
 <div class="veritas-header">
     <div class="veritas-title">🔍 VERITAS PRO MAX</div>
     <div class="veritas-subtitle">Intelligence · Fact-Checking · Dezinformare</div>
-    <div class="veritas-badge">v3.0 · Gemini 2.5 Flash · Multi-Domain Analysis</div>
+    <div class="veritas-badge">v3.0 · Gemini 2.0 Flash · Multi-Domain Analysis</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -360,7 +360,7 @@ st.sidebar.markdown("""
 ---
 **Veritas Pro Max v3.0**
 
-Motor: `gemini-1.5-flash`  
+Motor: `gemini-2.0-flash`  
 Analiză: **multi-domeniu** — politic, juridic, științific, financiar, media  
 Extracție: rezistentă la anti-bot, fallback multi-strategie
 
@@ -737,7 +737,7 @@ if msg_continut:
             for attempt in range(MAX_RETRY):
                 try:
                     response = client.models.generate_content(
-                        model='gemini-1.5-flash',
+                        model='gemini-2.0-flash',
                         contents=continut_apel,
                         config=types.GenerateContentConfig(
                             system_instruction=PROMPT_SISTEM,
